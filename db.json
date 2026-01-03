@@ -1,0 +1,30 @@
+{
+  "usuarios": [],
+  "LogsAuditoria": [],
+  "pacientes": [
+    {
+      "id": "2628",
+      "nome": "José Antônio",
+      "dataNascimento": "1987-03-14",
+      "telefone": "11987452231",
+      "cpf": "47291366804",
+      "idade": "40"
+    },
+    {
+      "id": "7463",
+      "nome": "Carlos Henrique Lima",
+      "dataNascimento": "1999-12-20",
+      "telefone": "(21) 99584-1372",
+      "cpf": "318.552.947-90",
+      "idade": "33"
+    }
+  ],
+  "exames": [
+    {
+      "tipo": "Hemograma",
+      "data": "2025-11-27",
+      "resultado": "Normal",
+      "id": "c344"
+    }
+  ]
+}
