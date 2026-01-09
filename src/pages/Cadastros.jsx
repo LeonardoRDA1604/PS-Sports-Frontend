@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Navbar from "../components/Navbar/Navbar";
 import AnimatedTitle from "../modals/AnimatedTitle";
+import ModalResponsavel from "../modals/responsavel";
 
 import { FaUser } from "react-icons/fa";
 import { FaUserFriends } from "react-icons/fa";
@@ -80,6 +81,7 @@ const abas = [
 const Cadastros = () => {
   const [abaAtiva, setAbaAtiva] = useState('atletas');
   const [termoPesquisa, setTermoPesquisa] = useState('');
+  const [modalAberto, setModalAberto] = useState(false);
 
   // Lógica de Filtragem de Atletas
   const athletesFiltrados = termoPesquisa.length > 0 && abaAtiva === 'atletas'
@@ -201,7 +203,11 @@ const Cadastros = () => {
           </div>
 
           {/* Botão Adicionar Novo Item */}
-          <button className="w-full sm:w-auto flex items-center justify-center space-x-2 bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg shadow-md hover:bg-blue-700 transition duration-200 order-1 sm:order-2">
+          <button 
+          onClick={() => {
+            if (abaAtiva === 'responsaveis') setModalAberto(true);
+          }}
+          className="w-full sm:w-auto flex items-center justify-center space-x-2 bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg shadow-md hover:bg-blue-700 transition duration-200 order-1 sm:order-2">
             <IoIosAddCircleOutline className="text-3xl" />
             <span className="text-sm sm:text-base">Adicionar {abas.find(a => a.id === abaAtiva)?.labelSingular}</span>
           </button>
@@ -602,6 +608,10 @@ const Cadastros = () => {
           )}
 
         </div>
+        <ModalResponsavel 
+          isOpen={modalAberto} 
+          onClose={() => setModalAberto(false)} 
+        />
       </div>
     </div>
   );
