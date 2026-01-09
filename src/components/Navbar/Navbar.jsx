@@ -1,7 +1,6 @@
 import { useState } from "react";
 
 import { Link } from "react-router-dom";
-import Logout from "../Logout/Logout";
 
 // icones usados na navbar
 import { BiDollar } from "react-icons/bi";
@@ -11,8 +10,7 @@ import { LuClipboardList } from "react-icons/lu";
 import { FaUsers } from "react-icons/fa";
 import { LuClipboardCheck } from "react-icons/lu";
 import { IoSettingsOutline } from "react-icons/io5";
-import {FcMenu} from "react-icons/fc";
-import NotificationIcon from "../Notificacao/NotificationIcon";
+import Header from "../Header/Header";
 
 function Navbar({ expanded, setExpanded }) {
   const usuario = JSON.parse(localStorage.getItem("usuario"));
@@ -27,12 +25,10 @@ function Navbar({ expanded, setExpanded }) {
         ${expanded ? "w-64" : "w-22"}
       `}
     >
-      {/* Logo com possivel alteração */}
+     {/* Expansão da Logo */}
      <div className="flex items-center justify-center mb-2 relative py-14 mt-12">
       {/* Logo Grande*/}
-
       <img src="src/assets/icons/ps-sports-logo-color.svg" alt="Logo Expandida" className={` filter drop-shadow-[0_0_05px_rgba(255,255,255,0.7)] absolute  py-4 transition-all duration-300 ${expanded ? "opacity-100 w-48" : "opacity-0 w-12"}`} />
-
       {/* Logo Pequena */}
       <img src="src/assets/icons/ps-sports-logo-color.svg" alt="Logo Minimizada" className={` filter drop-shadow-[0_0_05px_rgba(255,255,255,0.7)] absolute py-4 transition-all duration-300 ${expanded ? "opacity-0 w-48" : "opacity-100 w-22"}`} />
      </div>
@@ -89,63 +85,29 @@ function Navbar({ expanded, setExpanded }) {
             ))}
           </ul>
         </nav>
-
-        {/* FOOTER */}
-        <div
-          className={`
-            h-36 w-64 flex gap-3 overflow-hidden
-            transition-all duration-300
-          `}
-        >
-          <div className="shrink-0 flex flex-col items-center justify-around w-12 h-full">
-          <div>
-              {/* NOVO CÓDIGO COM INICIAIS */}
-              <div className="w-10 h-10 rounded-full ring-2 ring-gray-900 bg-gray-200 flex items-center justify-center">
-                  <span className="text-sm font-medium text-gray-700">LW</span> {/* Altere "JS" pelas iniciais desejadas */}
-              </div>
-              {/* FIM NOVO CÓDIGO */}
-          </div>
-          <div className="mt-1">
-              {/* ... restante do código ... */}
-              <Logout />
-              <NotificationIcon count={3} />
-              
-            </div>
-            {/* <div>
-              <h5>Sair</h5>
-            </div> */}
-          </div>
-
-          <div
-            className={`
-              flex flex-col transition-all duration-300 mt-1 gap-3
-              ${expanded ? "opacity-100 max-w-200px" : "opacity-0 max-w-0  overflow-hidden"}
-            `}
-          >
-            <p className="font-semibold text-primary-50 whitespace-nowrap">{usuario?.nome}</p>
-            <p className="text-sm text-primary-200 whitespace-nowrap">{usuario?.email}</p>
-          </div>
-        </div>
       </div>
     </aside>
   );
 }
 
-export default function Layout({ children }) {
+export default function Layout({ children, title, subtitle }) {
   const [expanded, setExpanded] = useState(true);
 
   return (
-    <div className="flex">
+    <div className="flex min-h-screen bg-primary-50">
+      {/* Sidebar Fixa */}
       <Navbar expanded={expanded} setExpanded={setExpanded} />
 
-      <main
-        className={`
-          flex-1 p-6 transition-all duration-300
-          ${expanded ? "ml-52" : "ml-10"}
-        `}
-      >
-        {children}
-      </main>
+      {/* Conteúdo que se ajusta à Sidebar */}
+      <div className={`flex flex-col flex-1 transition-all duration-300 ${expanded ? "ml-64" : "ml-22"}`}>
+        
+        {/* O Header agora recebe o título via prop */}
+        <Header title={title} subtitle={subtitle} />
+
+        <main className="p-6">
+          {children}
+        </main>
+      </div>
     </div>
   );
 }
