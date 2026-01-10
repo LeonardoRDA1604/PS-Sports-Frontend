@@ -5,6 +5,7 @@ export default function ModalCadastroModalidade({ aberto, onClose }) {
   if (!aberto) return null; // Não renderiza nada quando estiver fechado
 
   return (
+    // z-99999 (z-index: 99999) para o modal aparecer acima de tudo, independente de onde esteja no código
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center min-h-screen z-99999">
       <div className="w-full max-w-md bg-white rounded-2xl shadow-xl border border-gray-200 flex flex-col max-h-[80vh]">
         

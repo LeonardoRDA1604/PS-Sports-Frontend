@@ -4,6 +4,7 @@ import Navbar from "../components/Navbar/Navbar";
 import AnimatedTitle from "../modals/AnimatedTitle";
 import { Card } from "../components/Card";
 import { AcaoRapida } from "../components/AcaoRapida/index";
+import Layout from "../components/Navbar/Navbar";
 
 export default function Dashboard({ expanded }) {
   const navigate = useNavigate();
@@ -86,25 +87,13 @@ export default function Dashboard({ expanded }) {
   ).length;
 
   return (
-    <div className="min-h-screen bg-primary-50 flex overflow-x-hidden">
-
-      <Navbar expanded={expanded} />
-
+    <Layout title="Dashboard" subtitle="Visão geral do PS Sport’s" >
       {/* MAIN */}
       <main
         className={`
           flex-1 p-6 transition-all duration-300
         `}
-      >
-        {/* Cabeçalho */}
-        <div className="flex justify-between items-center">
-          <AnimatedTitle text="Dashboard" />       
-        </div>
-
-        <div className="text-xs sm:text-base text-gray-500 mb-4">
-          <p>Visão geral do PS Sport’s</p>                 
-        </div>
-        
+      > 
         <section className="cards">
         {/* CARDS */}
           <div className="acoes-rapidas mt-10">
@@ -133,7 +122,7 @@ export default function Dashboard({ expanded }) {
           </div>         
         </section>        
       </main>
-    </div>
+    </Layout>
   );
 }
 
