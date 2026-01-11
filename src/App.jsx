@@ -6,6 +6,7 @@ import Cadastro from "./components/Auth/Cadastro"; // O novo componente
 import EsqueciSenha from "./components/Auth/EsqueciSenha"; // O novo componente
 import VisualizarImagens from "./pages/VisualizarImagens";
 import "./index.css";
+import Presenca from "./pages/Presencas";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
       <Route path="/cadastro" element={<Cadastro />} />
       <Route path="/esqueci-senha" element={<EsqueciSenha />} />
       <Route path="/VisualizarImagens" element={<VisualizarImagens />} />
+      <Route path="/presenças" element={<Presenca />} />
     </Routes>
   );
 }
