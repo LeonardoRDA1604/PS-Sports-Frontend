@@ -55,10 +55,11 @@ export default function Cadastro() {
   return (
     <div
       className="min-h-screen flex items-center justify-center p-4"
-      style={{ background: "radial-gradient(circle at 50% 50%, #0036cc, #000125)" }}
+      style={{
+        background: "radial-gradient(circle at 50% 50%, #0036cc, #000125)",
+      }}
     >
       <div className="bg-gray-800 shadow-2xl rounded-2xl overflow-hidden w-full max-w-4xl flex flex-col md:flex-row bg-opacity-90">
-
         {/* FORMULÁRIO */}
         <div className="w-full md:w-1/2 p-10 bg-gray-900 rounded-l-2xl flex flex-col justify-center">
           <h2 className="text-2xl font-bold mb-8 text-center text-white tracking-wider">
@@ -66,7 +67,6 @@ export default function Cadastro() {
           </h2>
 
           <form className="flex flex-col gap-5" onSubmit={handleSubmit}>
-
             {/* Nome */}
             <div className="relative">
               <input
@@ -106,8 +106,9 @@ export default function Cadastro() {
               </label>
 
               <p className="text-xs text-gray-400">
-                Escolha <span className="text-white font-medium">Treinador</span>{" "}
-                para gerenciar atletas e treinos ou{" "}
+                Escolha{" "}
+                <span className="text-white font-medium">Treinador</span> para
+                gerenciar atletas e treinos ou{" "}
                 <span className="text-white font-medium">Administrador</span>{" "}
                 para acessar configurações e controles do sistema.
               </p>
@@ -202,7 +203,7 @@ export default function Cadastro() {
         </div>
 
         {/* IMAGEM */}
-        <div className="hidden md:flex md:w-1/2 items-center justify-center bg-gradient-to-b from-gray-800 via-white to-gray-900 p-8">
+        <div className="hidden md:flex md:w-1/2 items-center justify-center bg-linear-to-b from-gray-800 via-white to-gray-900 p-8">
           <img
             src="/src/assets/icons/ps-sports-logo-color.svg"
             alt="Logo da aplicação"
