@@ -7,6 +7,7 @@ export default function ModalCadastroAtleta({
   onClose,
   onSave,
   atleta,
+  responsavelContexto, // Dados do responsável atual
 }) {
   const [step, setStep] = useState(1); // Controle da página (1 ou 2)
   const [enderecoMesmoAtleta, setEnderecoMesmoAtleta] = useState(true); // Boolean de Mesmo Endereço do Atleta
@@ -26,7 +27,7 @@ export default function ModalCadastroAtleta({
     cep: "",
     bairro: "",
     cidade: "",
-    uf: "SP",
+    uf: "",
     logradouro: "",
     complemento: "",
     observacoes: "",
@@ -39,7 +40,7 @@ export default function ModalCadastroAtleta({
     respCep: "",
     respBairro: "",
     respCidade: "",
-    respUf: "SP",
+    respUf: "",
     respLogradouro: "",
     respComplemento: "",
   };
@@ -48,13 +49,40 @@ export default function ModalCadastroAtleta({
 
   // Preencher dados quando estiver editando
   useEffect(() => {
-    if (aberto && atleta) {
-      setFormData(atleta);
-    } else {
-      setFormData(estadoInicial);
+    if (aberto) {
+      if (atleta) {
+        // Modo Edição de Atleta Existente
+        setFormData(atleta);
+      } else if (responsavelContexto) {
+        // Modo Novo Atleta vinculado a um Responsável já aberto
+        setFormData({
+          ...estadoInicial,
+          respCpf: responsavelContexto.cpf || "",
+          respNome: responsavelContexto.name || "",
+          respEmail: responsavelContexto.email || "",
+          respTelefone: responsavelContexto.phoneNumber || responsavelContexto.phone || "",
+          respParentesco: responsavelContexto.kinship || "",
+          // Herda o endereço do responsável para o atleta inicialmente
+          cep: responsavelContexto.cep || "",
+          bairro: responsavelContexto.bairro || "",
+          cidade: responsavelContexto.cidade || "",
+          uf: responsavelContexto.uf || "",
+          logradouro: responsavelContexto.logradouro || responsavelContexto.street || "",
+          complemento: responsavelContexto.complemento || "",
+          // Dados fixos do responsável na pág 2
+          respCep: responsavelContexto.cep || "",
+          respBairro: responsavelContexto.bairro || "",
+          respCidade: responsavelContexto.city || responsavelContexto.cidade || "",
+          respUf: responsavelContexto.uf || "",
+          respLogradouro: responsavelContexto.logradouro || responsavelContexto.street || "",
+          respComplemento: responsavelContexto.complemento || "",
+        });
+      } else {
+        setFormData(estadoInicial);
+      }
+      setStep(1);
     }
-    setStep(1);
-  }, [aberto, atleta]);
+  }, [aberto, atleta, responsavelContexto]);
 
   // Mapeamento de turmas por categoria
   const opcoesTurmas = {
@@ -284,22 +312,19 @@ export default function ModalCadastroAtleta({
   if (!aberto) return null; // Não renderiza nada quando estiver fechado
 
   return (
-    // z-99999 (z-index: 99999) para o modal aparecer acima de tudo, independente de onde esteja no código
-    <div className="fixed inset-0 bg-black/50 flex items-center justify-center min-h-screen z-99999">
+    // z-99999 (z-index: 110000) para o modal aparecer acima de tudo (principalmente acima do modal de visualização de responsável), independente de onde esteja no código
+    <div className="fixed inset-0 bg-black/50 flex items-center justify-center min-h-screen z-110000">
       <div className="w-full max-w-md bg-white rounded-2xl shadow-xl border border-gray-200 flex flex-col max-h-[80vh]">
+        
         {/* Cabeçalho */}
-        <div className="flex justify-between items-start px-6 py-5 border-b border-gray-100 sticky top-0 bg-white z-10 rounded-t-2xl">
-          <div>
-            <h2 className="text-xl font-bold text-[#101944]">Novo Atleta</h2>
-          </div>
+        <div className="flex justify-between items-center px-6 py-5 border-b border-gray-100">
+          <h2 className="text-xl font-bold text-[#101944]">Novo Atleta</h2>
           <div className="flex items-center gap-4">
-            <span className="text-xs text-gray-400 font-medium">
-              Pág {step}/2
-            </span>
-            <button
-              className="text-[#101944] hover:bg-gray-100 p-1 rounded-full transition-colors cursor-pointer"
-              onClick={handleClose}
-            >
+            {/* Oculta "Pág 1/2" se houver contexto de responsável */}
+            {!responsavelContexto && (
+              <span className="text-xs text-gray-400 font-bold">Pág {step}/2</span>
+            )}
+            <button onClick={onClose} className="text-[#101944] hover:bg-gray-100 p-1 rounded-full transition-colors cursor-pointer">
               <IoClose size={24} />
             </button>
           </div>
@@ -519,7 +544,7 @@ export default function ModalCadastroAtleta({
                   onChange={handleChange}
                   className={`${selectStyle} appearance-none`}
                 >
-                  <option value="">Selecione o Estado</option>
+                  <option value="" disabled>Selecione o Estado</option>
                   <option value="AC">Acre</option>
                   <option value="AL">Alagoas</option>
                   <option value="AP">Amapá</option>
@@ -847,27 +872,29 @@ export default function ModalCadastroAtleta({
           )}
         </div>
 
-        {/* Rodapé Fixo */}
-        <div className="flex items-center justify-end space-x-6 px-6 py-5 border-t border-gray-100 bg-white rounded-b-2xl">
-          <button
-            type="button"
-            className="text-[#101944] font-bold hover:underline transition-all cursor-pointer text-sm"
-            onClick={step === 1 ? handleClose : () => setStep(1)}
-          >
-            {step === 1 ? "Cancelar" : "Voltar"}
+        {/* Rodapé */}
+        <div className="p-6 border-t border-gray-100 flex justify-end gap-4 bg-gray-50 rounded-b-2xl">
+          <button onClick={onClose} className="text-[#101944] font-bold text-sm hover:underline">
+            Cancelar
           </button>
-
-          <button
-            type="button"
-            className={`px-10 py-2.5 font-bold rounded-full transition-colors shadow-md text-sm ${
-              validarCampos()
-                ? "bg-[#003366] text-white hover:bg-[#002850] cursor-pointer shadow-blue-900/20"
-                : "bg-gray-300 text-gray-500 cursor-not-allowed shadow-none"
-            }`}
+          
+          <button 
+            onClick={() => {
+              // Se houver contexto de responsável ou já estivermos no step 2, salva.
+              // Caso contrário, continua para o step 2.
+              if (responsavelContexto || step === 2) {
+                handleSalvar();
+              } else {
+                setStep(2);
+              }
+            }}
             disabled={!validarCampos()}
-            onClick={() => (step === 1 ? setStep(2) : handleSalvar())}
+            className={`px-10 py-2.5 rounded-full font-bold shadow-md transition-all ${
+              validarCampos() ? 'bg-[#003366] text-white hover:bg-blue-900' : 'bg-gray-300 text-gray-500 cursor-not-allowed'
+            }`}
           >
-            {step === 1 ? "Continuar" : "Salvar"}
+            {/* O botão vira "Salvar" imediatamente se houver contexto */}
+            {responsavelContexto || step === 2 ? "Salvar" : "Continuar"}
           </button>
         </div>
       </div>

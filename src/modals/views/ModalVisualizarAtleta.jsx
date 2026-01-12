@@ -300,15 +300,40 @@ export default function ModalVisualizarAtleta({
   };
 
   const handleDiscard = () => {
-    /** Restaura os dados originais do atleta ao descartar edições */
-    const listaOriginal = Array.isArray(atleta.responsiblesList)
-      ? [...atleta.responsiblesList]
-      : atleta.responsible
-      ? [atleta.responsible]
-      : [];
-    setFormData({ ...atleta, responsiblesList: listaOriginal });
+    if (!atleta) return;
+
+    // Reconstrói a lista de responsáveis exatamente como no useEffect
+    let listaOriginal = Array.isArray(atleta.responsiblesList)
+        ? [...atleta.responsiblesList]
+        : atleta.responsible
+            ? [atleta.responsible]
+            : [];
+
+    if (atleta.respNome && !listaOriginal.includes(atleta.respNome)) {
+        listaOriginal = [atleta.respNome, ...listaOriginal];
+    }
+
+    // Restaura o formData para o estado original da prop 'atleta'
+    setFormData({
+        ...atleta,
+        birthDate: atleta.birthDate || atleta.nascimento || "",
+        modality: atleta.modality || atleta.modalidade || "Futebol de Campo",
+        category: atleta.category || "Sub-12",
+        classes: atleta.classes || "A12",
+        observations: atleta.observations || atleta.observacoes || "",
+        responsiblesList: listaOriginal,
+        address: {
+            street: atleta.address?.street || atleta.logradouro || "",
+            neighborhood: atleta.address?.neighborhood || atleta.bairro || "",
+            city: atleta.address?.city || atleta.cidade || "",
+            uf: atleta.address?.uf || atleta.uf || "SP",
+            cep: atleta.address?.cep || atleta.cep || "",
+            complement: atleta.address?.complement || atleta.complemento || "",
+        }
+    });
+
     setEmailErro(false);
-    setIsEditing(false);
+    setIsEditing(false); // Desativa o modo de edição
   };
 
   const handleFinalSave = () => {
