@@ -1,17 +1,51 @@
-import { useState } from 'react';
+import { useState, useEffect } from "react";
 import { IoClose } from "react-icons/io5";
 
-export default function ModalCadastroModalidade({ aberto, onClose }) {
-  const [nomeModalidade, setNomeModalidade] = useState('');
+export default function ModalCadastroModalidade({
+  aberto,
+  onClose,
+  onSave,
+  modalidade,
+}) {
+  const estadoInicial = {
+    nomeModalidade: "",
+  };
+
+  const [formData, setFormData] = useState(estadoInicial);
+
+  // Preencher dados quando estiver editando
+  useEffect(() => {
+    if (aberto && modalidade) {
+      setFormData(modalidade);
+    } else {
+      setFormData(estadoInicial);
+    }
+  }, [aberto, modalidade]);
 
   // Função para fechar o modal e resetar o campo
   const handleClose = () => {
-    setNomeModalidade(''); // Reseta o input
-    onClose(); // Fecha o modal
+    setFormData(estadoInicial);
+    onClose();
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleSalvar = () => {
+    if (!validarCampos()) return;
+    const payload = {
+      name: formData.nomeModalidade,
+    };
+    onSave?.(payload);
+    handleClose();
   };
 
   // Verificação de campo obrigatório
-  const campoPreenchido = nomeModalidade.trim() !== '';
+  const validarCampos = () => {
+    return formData.nomeModalidade.trim() !== "";
+  };
 
   if (!aberto) return null; // Não renderiza nada quando estiver fechado
 
@@ -19,12 +53,11 @@ export default function ModalCadastroModalidade({ aberto, onClose }) {
     // z-99999 (z-index: 99999) para o modal aparecer acima de tudo, independente de onde esteja no código
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center min-h-screen z-99999">
       <div className="w-full max-w-md bg-white rounded-2xl shadow-xl border border-gray-200 flex flex-col max-h-[80vh]">
-        
         {/* Cabeçalho Fixo */}
         <div className="flex justify-between items-center px-6 py-5 border-b border-gray-100 sticky top-0 bg-white z-10 rounded-t-2xl">
           <h2 className="text-xl font-bold text-[#101944]">Nova Modalidade</h2>
-          <button 
-            className="text-[#101944] hover:bg-gray-100 p-1 rounded-full transition-colors cursor-pointer" 
+          <button
+            className="text-[#101944] hover:bg-gray-100 p-1 rounded-full transition-colors cursor-pointer"
             onClick={handleClose}
           >
             <IoClose size={24} />
@@ -38,10 +71,11 @@ export default function ModalCadastroModalidade({ aberto, onClose }) {
             <label className="block text-sm font-semibold text-slate-600 mb-1">
               Nome da Modalidade <span className="text-red-500">*</span>
             </label>
-            <input 
-              type="text" 
-              value={nomeModalidade}
-              onChange={(e) => setNomeModalidade(e.target.value)}
+            <input
+              type="text"
+              name="nomeModalidade"
+              value={formData.nomeModalidade}
+              onChange={handleChange}
               placeholder="Ex: Futebol"
               className="w-full px-4 py-2.5 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500/20 focus:border-blue-600 outline-none transition-all text-sm placeholder:text-gray-400"
             />
@@ -50,22 +84,22 @@ export default function ModalCadastroModalidade({ aberto, onClose }) {
 
         {/* Rodapé Fixo */}
         <div className="flex items-center justify-end space-x-6 px-6 py-5 border-t border-gray-100 bg-white rounded-b-2xl">
-          <button 
-            type="button" 
+          <button
+            type="button"
             className="text-[#101944] font-bold hover:underline transition-all cursor-pointer text-sm"
             onClick={handleClose}
           >
             Cancelar
           </button>
-          <button 
-            type="button" 
-            disabled={!campoPreenchido}
+          <button
+            type="button"
+            disabled={!validarCampos()}
             className={`px-10 py-2.5 font-bold rounded-full transition-colors shadow-md text-sm ${
-              campoPreenchido 
-              ? 'bg-[#003366] text-white hover:bg-[#002850] cursor-pointer shadow-blue-900/20' 
-              : 'bg-gray-300 text-gray-500 cursor-not-allowed shadow-none'
+              validarCampos()
+                ? "bg-[#003366] text-white hover:bg-[#002850] cursor-pointer shadow-blue-900/20"
+                : "bg-gray-300 text-gray-500 cursor-not-allowed shadow-none"
             }`}
-            onClick={handleClose}
+            onClick={handleSalvar}
           >
             Salvar
           </button>

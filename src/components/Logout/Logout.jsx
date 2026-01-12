@@ -11,7 +11,7 @@ export default function Logout() {
       {/* Container do botão com className "group" (para afetar elementos com group-hover ao dar hover no container em si) */}
       <button
         onClick={() => setAbrirModal(true)}
-        className="group px-4 py-2 cursor-pointer hover:scale-115"
+        className="group cursor-pointer hover:scale-115 py-2.5"
       >
         {/* Elementos do botão */}
         <p className="text-primary-50 text-xs group-hover:text-red-600">Sair</p>

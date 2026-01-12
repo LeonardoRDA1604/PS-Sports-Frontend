@@ -1,7 +1,6 @@
 import { motion } from "framer-motion";
 
-export default function AnimatedSubTitle({text = " "}) {
-
+export default function AnimatedSubTitle({ text = " " }) {
   const letter = {
     hidden: { opacity: 0, y: 20 },
     visible: (i) => ({
@@ -15,17 +14,20 @@ export default function AnimatedSubTitle({text = " "}) {
     }),
   };
 
+  const MotionH1 = motion.h1;
+  const MotionSpan = motion.span;
+
   return (
-    <motion.h1
+    <MotionH1
       className="text-1xl font-bold inline-flex"
       initial="hidden"
       animate="visible"
     >
       {text.split("").map((char, i) => (
-        <motion.span key={i} custom={i} variants={letter}>
+        <MotionSpan key={i} custom={i} variants={letter}>
           {char === " " ? "\u00A0" : char}
-        </motion.span>
+        </MotionSpan>
       ))}
-    </motion.h1>
+    </MotionH1>
   );
 }

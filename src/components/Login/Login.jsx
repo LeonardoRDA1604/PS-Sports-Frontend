@@ -52,12 +52,14 @@ export default function Login() {
 
   return (
     // Fundo gradiente escuro com brilho centralizado, simulando o estilo da imagem
-    <div className="min-h-screen flex items-center justify-center p-4"
-         style={{ background: 'radial-gradient(circle at 50% 50%, #0036cc, #000125)' }}>
-      
+    <div
+      className="min-h-screen flex items-center justify-center p-4"
+      style={{
+        background: "radial-gradient(circle at 50% 50%, #0036cc, #000125)",
+      }}
+    >
       {/* Cartão de Login: Fundo escuro, bordas arredondadas e sombra forte */}
       <div className="bg-gray-800 shadow-2xl rounded-2xl overflow-hidden w-full max-w-4xl flex flex-col md:flex-row bg-opacity-90">
-
         {/* FORMULÁRIO (Lado Esquerdo) */}
         {/* Fundo do formulário claro para contraste com o dark-mode do cartão */}
         <div className="w-full md:w-1/2 p-10 bg-gray-900 rounded-l-2xl flex flex-col justify-center">
@@ -66,7 +68,6 @@ export default function Login() {
           </h2>
 
           <form className="flex flex-col gap-5" onSubmit={handleSubmit}>
-
             {/* Campo Tipo de Usuário (Select) */}
             <div className="relative">
               <select
@@ -81,16 +82,26 @@ export default function Login() {
                 <option value="">Quem está acessando?</option>
                 <option value="administrador">Administrador</option>
                 <option value="treinador">Treinador</option>
-                
               </select>
               {/* Ícone para o Select */}
               <span className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none text-gray-400">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-5 w-5"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth={2}
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+                  />
                 </svg>
               </span>
             </div>
-            
+
             {/* Campo E-mail */}
             <div className="relative">
               <input
@@ -106,8 +117,19 @@ export default function Login() {
               />
               {/* Ícone de Email (Envelope) */}
               <span className="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-400">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8m-2 4v7a2 2 0 01-2 2H5a2 2 0 01-2-2v-7" />
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-5 w-5"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth={2}
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8m-2 4v7a2 2 0 01-2 2H5a2 2 0 01-2-2v-7"
+                  />
                 </svg>
               </span>
             </div>
@@ -127,9 +149,24 @@ export default function Login() {
               />
               {/* Ícone de Senha (Cadeado) */}
               <span className="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-400">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2z" />
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M14 9V5a2 2 0 00-2-2H8a2 2 0 00-2 2v4" />
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-5 w-5"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth={2}
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2z"
+                  />
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M14 9V5a2 2 0 00-2-2H8a2 2 0 00-2 2v4"
+                  />
                 </svg>
               </span>
             </div>
@@ -147,44 +184,43 @@ export default function Login() {
               type="submit"
             >
               <div className="flex items-center justify-center gap-2">
-                <MdLogin  size={30} />
+                <MdLogin size={30} />
                 <span className="text-2xl">Entrar</span>
               </div>
             </button>
-            
+
             <div className="flex flex-row justify-between mt-4">
-            {/* Link "Esqueci minha senha" */}
-            <button
-              type="button"
-              onClick={() => navigate("/esqueci-senha")}
-              className="text-gray-200 hover:text-blue-400 hover:underline mt-2 text-center text-md cursor-pointer"
-            >
-              Esqueci a senha
-            </button>
-            {/* Link Cadastre-se */}
-            <button
-              type="button"
-              onClick={() => navigate("/cadastro")}
-              className="text-gray-200 hover:text-blue-400 hover:underline mt-2 text-center text-md cursor-pointer"
-            >
-              Cadastre-se
-            </button>
+              {/* Link "Esqueci minha senha" */}
+              <button
+                type="button"
+                onClick={() => navigate("/esqueci-senha")}
+                className="text-gray-200 hover:text-blue-400 hover:underline mt-2 text-center text-md cursor-pointer"
+              >
+                Esqueci a senha
+              </button>
+              {/* Link Cadastre-se */}
+              <button
+                type="button"
+                onClick={() => navigate("/cadastro")}
+                className="text-gray-200 hover:text-blue-400 hover:underline mt-2 text-center text-md cursor-pointer"
+              >
+                Cadastre-se
+              </button>
             </div>
           </form>
         </div>
 
         {/* IMAGEM (Lado Direito) - Mantido com o seu caminho original */}
         <div className="hidden md:block md:w-1/2 rounded-r-2xl overflow-hidden">
-            <div className="w-full h-full flex items-center justify-center bg-gradient-to-b from-gray-800 via-white to-gray-900 p-8">
-                {/* O background-image foi substituído por uma cor sólida para manter o esquema dark-mode, e a logo centralizada */}
-                <img
-                    src="/src/assets/icons/ps-sports-logo-color.svg"
-                    alt="Logo da Aplicação"
-                    className="w-3/4 h-auto object-contain"
-                />
-            </div>
+          <div className="w-full h-full flex items-center justify-center bg-linear-to-b from-gray-800 via-white to-gray-900 p-8">
+            {/* O background-image foi substituído por uma cor sólida para manter o esquema dark-mode, e a logo centralizada */}
+            <img
+              src="/src/assets/icons/ps-sports-logo-color.svg"
+              alt="Logo da Aplicação"
+              className="w-3/4 h-auto object-contain"
+            />
+          </div>
         </div>
-
       </div>
     </div>
   );

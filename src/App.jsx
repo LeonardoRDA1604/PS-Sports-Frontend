@@ -2,9 +2,13 @@ import { Routes, Route } from "react-router-dom";
 import Login from "./components/Login/Login";
 import Dashboard from "./pages/Dashboard";
 import Cadastros from "./pages/Cadastros";
-import Cadastro from "./components/Auth/Cadastro"; // O novo componente
-import EsqueciSenha from "./components/Auth/EsqueciSenha"; // O novo componente
-import VisualizarImagens from "./pages/VisualizarImagens";
+import Cadastro from "./components/Auth/Cadastro";
+import EsqueciSenha from "./components/Auth/EsqueciSenha";
+import Financeiro from "./pages/Financeiro";
+import Presencas from "./pages/Presencas";
+import Interessados from "./pages/Interessados";
+import Relatorios from "./pages/Relatorios";
+import Administracao from "./pages/Administracao";
 import "./index.css";
 
 function App() {
@@ -12,10 +16,14 @@ function App() {
     <Routes>
       <Route path="/" element={<Login />} />
       <Route path="/dashboard" element={<Dashboard />} />
-      <Route path="/Cadastros" element={<Cadastros />} />
+      <Route path="/cadastros" element={<Cadastros />} />
       <Route path="/cadastro" element={<Cadastro />} />
       <Route path="/esqueci-senha" element={<EsqueciSenha />} />
-      <Route path="/VisualizarImagens" element={<VisualizarImagens />} />
+      <Route path="/financeiro" element={<Financeiro />} />
+      <Route path="/presencas" element={<Presencas />} />
+      <Route path="/interessados" element={<Interessados />} />
+      <Route path="/relatorios" element={<Relatorios />} />
+      <Route path="/administracao" element={<Administracao />} />
     </Routes>
   );
 }

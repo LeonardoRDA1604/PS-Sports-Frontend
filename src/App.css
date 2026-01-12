@@ -40,3 +40,18 @@
 .read-the-docs {
   color: #888;
 }
+
+/* Estilos para bloqueio de acesso */
+.cursor-blocked {
+  cursor: not-allowed !important;
+  opacity: 0.6;
+}
+
+.cursor-blocked:hover {
+  cursor: not-allowed !important;
+}
+
+.btn-disabled {
+  pointer-events: none;
+  opacity: 0.5;
+}
