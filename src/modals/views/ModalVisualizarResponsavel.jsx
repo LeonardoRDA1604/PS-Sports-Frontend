@@ -11,11 +11,7 @@ import {
 import { temAcessoBloqueado } from '../../utils/permissoes';
 import ModalCadastroAtleta from '../forms/ModalCadastroAtleta';
 
-/**
- * Modal para visualizar e editar informações de um Responsável
- * Adaptado do Modal de Atletas para manter consistência visual e funcional
- */
-export default function ModalVisualizarResp({
+export default function ModalVisualizarResponsavel({
 	aberto,
 	onClose,
 	responsavel,

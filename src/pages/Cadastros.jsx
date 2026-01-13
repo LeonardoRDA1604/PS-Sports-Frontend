@@ -1,17 +1,20 @@
 import { useState, useEffect } from 'react';
 
-import { FaUser } from 'react-icons/fa';
-import { FaUserFriends } from 'react-icons/fa';
-import { FaPersonChalkboard } from 'react-icons/fa6';
-import { HiMiniUserGroup } from 'react-icons/hi2';
-import { FaTableList } from 'react-icons/fa6';
-import { FaRunning } from 'react-icons/fa';
-import { MdPersonAdd } from 'react-icons/md';
-import { MdDelete } from 'react-icons/md';
-import { IoLockClosed } from 'react-icons/io5';
-import BotaoAdicionar from '../components/BotaoAdicionar/BotaoAdicionar';
 import { list, create, remove, update } from '../data/api';
+import { temAcessoBloqueado } from '../utils/permissoes';
+
+// --- ÍCONES ---
+import { FaUser, FaUserFriends, FaRunning } from 'react-icons/fa';
+import { FaPersonChalkboard, FaTableList } from 'react-icons/fa6';
+import { HiMiniUserGroup } from 'react-icons/hi2';
+import { MdPersonAdd, MdDelete } from 'react-icons/md';
+import { IoInformationCircle, IoLockClosed } from 'react-icons/io5';
+
+// --- COMPONENTES ---
 import Layout from '../components/Navbar/Navbar';
+import BotaoAdicionar from '../components/BotaoAdicionar/BotaoAdicionar';
+
+// --- MODALS ---
 import ModalCadastroInteressado from '../modals/forms/ModalCadastroInteressado';
 import ModalCadastroAtleta from '../modals/forms/ModalCadastroAtleta';
 import ModalCadastroResponsavel from '../modals/forms/ModalCadastroResponsavel';
@@ -20,12 +23,12 @@ import ModalCadastroTurma from '../modals/forms/ModalCadastroTurma';
 import ModalCadastroCategoria from '../modals/forms/ModalCadastroCategoria';
 import ModalCadastroModalidade from '../modals/forms/ModalCadastroModalidade';
 import ModalVisualizarAtleta from '../modals/views/ModalVisualizarAtleta';
-import ModalVisualizarResp from '../modals/views/ModalVisualizarResp';
+import ModalVisualizarResponsavel from '../modals/views/ModalVisualizarResponsavel';
 import ModalVisualizarTurma from '../modals/views/ModalVisualizarTurma';
 import ModalVisualizarCategoria from '../modals/views/ModalVisualizarCategoria';
 import ModalVisualizarModalidade from '../modals/views/ModalVisualizarModalidade';
-import { temAcessoBloqueado } from '../utils/permissoes';
 import ModalVisualizarInteressado from '../modals/views/ModalVisualizarInteressado';
+import ModalVisualizarTreinador from '../modals/views/ModalVisualizarTreinador';
 
 // Dados dos Atletas
 const athletesData = [
@@ -342,10 +345,34 @@ const responsibleData = [
 
 // Dados dos Treinadores
 const coachData = [
-	{ id: 1, name: 'Pep Guardiola', workTimes: '06:00 - 12:00', phoneNumber: '(81) 91111-1111' },
-	{ id: 2, name: 'Carlo Ancelotti', workTimes: '06:00 - 12:00', phoneNumber: '(81) 92222-2222' },
-	{ id: 3, name: 'Xabi Alonso', workTimes: '14:00 - 20:00', phoneNumber: '(81) 93333-3333' },
-	{ id: 4, name: 'Mikel Arteta', workTimes: '14:00 - 20:00', phoneNumber: '(81) 94444-4444' },
+	{
+		id: 1,
+		name: 'Pep Guardiola',
+		classes: ['A12', 'B12', 'C12'],
+		workTimes: '06:00 - 12:00',
+		phoneNumber: '(81) 91111-1111',
+	},
+	{
+		id: 2,
+		name: 'Carlo Ancelotti',
+		classes: ['A14', 'B14', 'C14'],
+		workTimes: '06:00 - 12:00',
+		phoneNumber: '(81) 92222-2222',
+	},
+	{
+		id: 3,
+		name: 'Xabi Alonso',
+		classes: ['A16', 'B16', 'C16'],
+		workTimes: '14:00 - 20:00',
+		phoneNumber: '(81) 93333-3333',
+	},
+	{
+		id: 4,
+		name: 'Mikel Arteta',
+		classes: ['A18', 'B18', 'C18'],
+		workTimes: '14:00 - 20:00',
+		phoneNumber: '(81) 94444-4444',
+	},
 ];
 
 // Dados das Turmas
@@ -497,28 +524,28 @@ const modalitiesData = [
 
 // Dados dos Interessados
 const interestedData = [
-  {
-    id: 1,
-    nome: "João Silva",
-    email: "joao.silva@email.com",
-    telefone: "(81) 98877-6655",
-    modalidade: "Futebol"
-  },
-  {
-    id: 2,
-    nome: "Maria Santos",
-    email: "maria.santos@gmail.com",
-    telefone: "(81) 99911-2233",
-    modalidade: "Futsal"
-  },
-  {
-    id: 3,
-    nome: "Pedro Oliveira",
-    email: "pedro.oli@outlook.com",
-    telefone: "(81) 98765-4321",
-    modalidade: "Beach Soccer"
-  }
-]
+	{
+		id: 1,
+		nome: 'João Silva',
+		email: 'joao.silva@email.com',
+		telefone: '(81) 98877-6655',
+		modalidade: 'Futebol',
+	},
+	{
+		id: 2,
+		nome: 'Maria Santos',
+		email: 'maria.santos@gmail.com',
+		telefone: '(81) 99911-2233',
+		modalidade: 'Futsal',
+	},
+	{
+		id: 3,
+		nome: 'Pedro Oliveira',
+		email: 'pedro.oli@outlook.com',
+		telefone: '(81) 98765-4321',
+		modalidade: 'Beach Soccer',
+	},
+];
 
 // Mapeamento das abas
 const abas = [
@@ -598,8 +625,10 @@ const Cadastros = () => {
 	// Estados para abrir os modais de visualização
 	const [abrirVisualizarAtleta, setAbrirVisualizarAtleta] = useState(false);
 	const [atletaSelecionado, setAtletaSelecionado] = useState(null);
-	const [abrirVisualizarResp, setAbrirVisualizarResp] = useState(false);
+	const [abrirVisualizarResponsavel, setAbrirVisualizarResponsavel] = useState(false);
 	const [responsavelSelecionado, setResponsavelSelecionado] = useState(null);
+	const [abrirVisualizarTreinador, setAbrirVisualizarTreinador] = useState(false);
+	const [treinadorSelecionado, setTreinadorSelecionado] = useState(null);
 	const [abrirVisualizarTurma, setAbrirVisualizarTurma] = useState(false);
 	const [turmaSelecionada, setTurmaSelecionada] = useState(null);
 	const [abrirVisualizarCategoria, setAbrirVisualizarCategoria] = useState(false);
@@ -724,6 +753,7 @@ const Cadastros = () => {
 		const { recurso, id } = confirmDelete;
 		try {
 			await remove(recurso, id);
+			
 			if (recurso === 'atletas') setAthletes((prev) => prev.filter((item) => item.id !== id));
 			if (recurso === 'responsaveis')
 				setResponsaveis((prev) => prev.filter((item) => item.id !== id));
@@ -794,18 +824,21 @@ const Cadastros = () => {
 			case 'treinadores':
 				return {
 					id: item.id,
-					nome: item.name || '',
-					cpf: item.cpf || '',
+					name: item.name || '',
 					email: item.email || '',
-					telefone: item.PhoneNumber || item.phoneNumber || '',
-					cep: item.cep || '',
-					bairro: item.bairro || '',
-					cidade: item.cidade || '',
-					uf: item.uf || '',
-					logradouro: item.logradouro || '',
-					complemento: item.complemento || '',
-					turmas: item.classes || [],
-					horarios: item.workTimes || [],
+					cpf: item.cpf || '',
+					phoneNumber: item.phoneNumber || '',
+					birthDate: item.birthDate || '', // Adicionado
+					classes: Array.isArray(item.classes) ? item.classes : [],
+					workTimes: item.workTimes || '',
+					address: item.address || {
+						street: item.logradouro || '',
+						neighborhood: item.bairro || '',
+						city: item.cidade || '',
+						uf: item.uf || 'PE',
+						cep: item.cep || '',
+						complement: item.complemento || '',
+					},
 				};
 			case 'turmas':
 				return {
@@ -940,7 +973,8 @@ const Cadastros = () => {
 							label={abas.find((a) => a.id === abaAtiva)?.labelSingular}
 							onCreated={handleCreated}
 							turmasGlobais={turmas}
-    						categoriasGlobais={categorias}
+							categoriasGlobais={categorias}
+							treinadoresGlobais={treinadores}
 						/>
 					) : (
 						<div className="text-xs sm:text-sm text-gray-500 italic">
@@ -1108,7 +1142,7 @@ const Cadastros = () => {
 												<button
 													onClick={() => {
 														setResponsavelSelecionado(item);
-														setAbrirVisualizarResp(true);
+														setAbrirVisualizarResponsavel(true);
 													}}
 													className="text-blue-600 hover:underline cursor-pointer"
 												>
@@ -1173,34 +1207,19 @@ const Cadastros = () => {
 							<table className="w-full divide-y divide-gray-200">
 								<thead className="bg-white">
 									<tr>
-										<th
-											scope="col"
-											className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap"
-										>
+										<th className="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">
 											Nome
 										</th>
-										<th
-											scope="col"
-											className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap"
-										>
+										<th className="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">
 											Turmas
 										</th>
-										<th
-											scope="col"
-											className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap"
-										>
+										<th className="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">
 											Horários
 										</th>
-										<th
-											scope="col"
-											className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap"
-										>
+										<th className="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">
 											Telefone
 										</th>
-										<th
-											scope="col"
-											className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap"
-										>
+										<th className="px-6 py-3 text-center text-xs font-bold text-gray-500 uppercase tracking-wider">
 											Ações
 										</th>
 									</tr>
@@ -1209,29 +1228,61 @@ const Cadastros = () => {
 								<tbody className="bg-white divide-y divide-gray-200">
 									{coachFiltrados.map((coach) => (
 										<tr key={coach.id} className="hover:bg-gray-50">
-											<td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-primary-900">
-												<a
-													href="#"
-													className="text-blue-600 hover:underline"
+											<td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
+												<button
+													onClick={() => {
+														setTreinadorSelecionado(coach);
+														setAbrirVisualizarTreinador(true);
+													}}
+													className="text-blue-600 hover:underline cursor-pointer"
 												>
 													{coach.name}
-												</a>
+												</button>
 											</td>
-											<td className="px-6 py-4 whitespace-nowrap text-sm text-primary-900 font-medium">
-												{coach.classes}
+											<td className="px-6 py-4 whitespace-wrap text-sm text-primary-900 font-medium max-w-xs">
+												<div className="flex flex-wrap gap-x-1">
+													{(coach.classes || []).map(
+														(turmaNome, index) => (
+															<span key={index}>
+																<button
+																	onClick={() => {
+																		const turmaObj =
+																			turmas.find(
+																				(t) =>
+																					t.nomeTurma ===
+																					turmaNome
+																			);
+																		if (turmaObj) {
+																			setTurmaSelecionada(
+																				turmaObj
+																			);
+																			setAbrirVisualizarTurma(
+																				true
+																			);
+																		}
+																	}}
+																	className="text-blue-600 hover:underline cursor-pointer text-sm"
+																>
+																	{turmaNome}
+																</button>
+																{index <
+																	coach.classes.length - 1 && (
+																	<span className="text-gray-500">
+																		,{' '}
+																	</span>
+																)}
+															</span>
+														)
+													)}
+												</div>
 											</td>
-											<td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
+											<td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
 												{coach.workTimes}
 											</td>
-											<td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
-												<a
-													href="#"
-													className="text-blue-600 hover:underline"
-												>
-													{coach.phoneNumber}
-												</a>
+											<td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
+												{coach.phoneNumber}
 											</td>
-											<td className="px-6 py-4 whitespace-nowrap text-sm font-medium flex gap-3 items-center">
+											<td className="px-6 py-4 whitespace-nowrap text-center">
 												<button
 													disabled={!isAdmin}
 													onClick={() =>
@@ -1246,16 +1297,11 @@ const Cadastros = () => {
 															? 'opacity-50 cursor-not-allowed'
 															: 'text-red-600 hover:text-red-800'
 													}`}
-													title={
-														isAdmin
-															? 'Deletar'
-															: 'Apenas administradores podem deletar'
-													}
 												>
-													{!isAdmin ? (
-														<IoLockClosed size={20} />
-													) : (
+													{isAdmin ? (
 														<MdDelete size={20} />
+													) : (
+														<IoLockClosed size={20} />
 													)}
 												</button>
 											</td>
@@ -1263,12 +1309,6 @@ const Cadastros = () => {
 									))}
 								</tbody>
 							</table>
-							{/* Mensagem de "Nenhum resultado" */}
-							{classesFiltrados.length === 0 && termoPesquisa.length > 0 && (
-								<div className="p-6 text-center text-gray-500">
-									Nenhuma turma encontrada com o termo "{termoPesquisa}".
-								</div>
-							)}
 						</div>
 					)}
 
@@ -1335,12 +1375,18 @@ const Cadastros = () => {
 												{item.workTimes}
 											</td>
 											<td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
-												<a
-													href="#"
-													className="text-blue-600 hover:underline"
-												>
-													{item.coach}
-												</a>
+												{item.coach ? (
+													<a
+														href="#"
+														className="text-blue-600 hover:underline"
+													>
+														{item.coach}
+													</a>
+												) : (
+													<span className="inline-flex items-center gap-1 text-red-500 font-medium italic">
+														<IoInformationCircle size={14} /> Pendente
+													</span>
+												)}
 											</td>
 											<td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
 												<a
@@ -2096,14 +2142,14 @@ const Cadastros = () => {
 					}}
 				/>
 
-				<ModalVisualizarResp
-					aberto={abrirVisualizarResp}
+				<ModalVisualizarResponsavel
+					aberto={abrirVisualizarResponsavel}
 					onClose={() => {
-						setAbrirVisualizarResp(false);
+						setAbrirVisualizarResponsavel(false);
 						setResponsavelSelecionado(null);
 					}}
-					turmasGlobais={turmas} 
-    				categoriasGlobais={categorias}
+					turmasGlobais={turmas}
+					categoriasGlobais={categorias}
 					responsavel={responsavelSelecionado}
 					onSave={async (dadosAtualizados) => {
 						try {
@@ -2119,9 +2165,37 @@ const Cadastros = () => {
 							// você precisará garantir que ele foi criado via handleCreatedExternal
 							// ou atualizar o estado manualmente aqui se necessário.
 
-							setAbrirVisualizarResp(false);
+							setAbrirVisualizarResponsavel(false);
 						} catch (e) {
 							console.error('Erro ao atualizar responsável', e);
+						}
+					}}
+				/>
+
+				<ModalVisualizarTreinador
+					aberto={abrirVisualizarTreinador}
+					onClose={() => {
+						setAbrirVisualizarTreinador(false);
+						setTreinadorSelecionado(null);
+					}}
+					treinador={treinadorSelecionado}
+					onSave={async (dadosAtualizados) => {
+						try {
+							// 1. Atualiza o treinador
+							await update('treinadores', dadosAtualizados.id, dadosAtualizados);
+							setTreinadores((prev) =>
+								prev.map((r) =>
+									r.id === dadosAtualizados.id ? dadosAtualizados : r
+								)
+							);
+
+							// 2. Lógica Adicional: Se o nome do atleta novo não existir na lista global de atletas,
+							// você precisará garantir que ele foi criado via handleCreatedExternal
+							// ou atualizar o estado manualmente aqui se necessário.
+
+							setAbrirVisualizarTreinador(false);
+						} catch (e) {
+							console.error('Erro ao atualizar treinador', e);
 						}
 					}}
 				/>
@@ -2131,6 +2205,7 @@ const Cadastros = () => {
 					onClose={() => setAbrirVisualizarTurma(false)}
 					turma={turmaSelecionada}
 					atletasGlobais={athletes}
+					treinadoresGlobais={treinadores}
 					onSave={async (turmaEditada) => {
 						try {
 							// LIMPEZA GLOBAL: Remove os atletas adicionados aqui de qualquer outra turma

@@ -1,10 +1,6 @@
 import { useState, useEffect } from 'react';
 import { IoClose, IoPerson, IoChevronDown } from 'react-icons/io5';
 
-/**
- * Modal para visualizar e editar informações de um Interessado
- * Mantém o padrão visual "ps-sports" com abas e cabeçalho dark.
- */
 export default function ModalVisualizarInteressado({
 	aberto,
 	onClose,
