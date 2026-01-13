@@ -443,17 +443,57 @@
 		}
 	],
 	"categorias": [
-		{ "id": "1", "name": "Sub-12", "classes": "A12, B12, C12", "modality": "Futebol" },
-		{ "id": "2", "name": "Sub-14", "classes": "A14, B14, C14", "modality": "Futsal" },
-		{ "id": "3", "name": "Sub-16", "classes": "A16, B16, C16", "modality": "Futebol" },
-		{ "id": "4", "name": "Sub-18", "classes": "A18, B18, C18", "modality": "Futebol" }
+		{
+			"id": "1",
+			"name": "Sub-12",
+			"classes": "A12, B12, C12",
+			"modality": "Futebol"
+		},
+		{
+			"id": "2",
+			"name": "Sub-14",
+			"classes": "A14, B14, C14",
+			"modality": "Futsal"
+		},
+		{
+			"id": "3",
+			"name": "Sub-16",
+			"classes": "A16, B16, C16",
+			"modality": "Futebol"
+		},
+		{
+			"id": "4",
+			"name": "Sub-18",
+			"classes": "A18, B18, C18",
+			"modality": "Futebol"
+		}
 	],
 	"modalidades": [
 		{
 			"id": "1",
 			"name": "Futebol",
-			"category": "Sub-12",
-			"classes": "A12"
+			"category": "Sub-12, Sub-16, Sub-18",
+			"classes": "A12, B12, C12, A16, C16, A18, B18, C18",
+			"categoriesArray": ["Sub-12", "Sub-16", "Sub-18"],
+			"classesArray": ["A12", "B12", "C12", "A16", "C16", "A18", "B18", "C18"]
+		},
+		{
+			"id": "2",
+			"name": "Futsal",
+			"category": "Sub-14",
+			"classes": "A14, B14, C14"
+		},
+		{
+			"id": "3",
+			"name": "Fut7",
+			"category": "Sub-16",
+			"classes": "B16"
+		},
+		{
+			"id": "4",
+			"name": "Beach Soccer",
+			"category": "Sub-16",
+			"classes": "A16"
 		}
 	],
 	"interessados": [

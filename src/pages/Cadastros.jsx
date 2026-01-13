@@ -20,10 +20,11 @@ import ModalCadastroTurma from '../modals/forms/ModalCadastroTurma';
 import ModalCadastroCategoria from '../modals/forms/ModalCadastroCategoria';
 import ModalCadastroModalidade from '../modals/forms/ModalCadastroModalidade';
 import ModalVisualizarAtleta from '../modals/views/ModalVisualizarAtleta';
-import { temAcessoBloqueado } from '../utils/permissoes';
 import ModalVisualizarResp from '../modals/views/ModalVisualizarResp';
 import ModalVisualizarTurma from '../modals/views/ModalVisualizarTurma';
 import ModalVisualizarCategoria from '../modals/views/ModalVisualizarCategoria';
+import ModalVisualizarModalidade from '../modals/views/ModalVisualizarModalidade';
+import { temAcessoBloqueado } from '../utils/permissoes';
 
 // Dados dos Atletas
 const athletesData = [
@@ -593,6 +594,8 @@ const Cadastros = () => {
 	const [turmaSelecionada, setTurmaSelecionada] = useState(null);
   const [abrirVisualizarCategoria, setAbrirVisualizarCategoria] = useState(false);
   const [categoriaSelecionada, setCategoriaSelecionada] = useState(null);
+  const [abrirVisualizarModalidade, setAbrirVisualizarModalidade] = useState(false);
+  const [modalidadeSelecionada, setModalidadeSelecionada] = useState(null);
 
 	// Verificar se o usuário é administrador
 	const usuarioAtual = JSON.parse(localStorage.getItem('usuario') || '{}');
@@ -1511,32 +1514,65 @@ const Cadastros = () => {
 								</thead>
 
 								<tbody className="bg-white divide-y divide-gray-200">
-									{modalitiesFiltrados.map((modality) => (
-										<tr key={modality.id} className="hover:bg-gray-50">
-											<td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-primary-900">
-												<a
-													href="#"
-													className="text-blue-600 hover:underline"
-												>
-													{modality.name}
-												</a>
-											</td>
-											<td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
-												<a
-													href="#"
-													className="text-blue-600 hover:underline"
-												>
-													{modality.category}
-												</a>
-											</td>
-											<td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
-												<a
-													href="#"
-													className="text-blue-600 hover:underline"
-												>
-													{modality.classes}
-												</a>
-											</td>
+                  {modalitiesFiltrados.map((modality) => (
+                    <tr key={modality.id} className="hover:bg-gray-50">
+                      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-primary-900">
+                        <button
+                          onClick={() => {
+                            setModalidadeSelecionada(modality);
+                            setAbrirVisualizarModalidade(true);
+                          }}
+                          className="text-blue-600 hover:underline text-sm cursor-pointer"
+                        >
+                          {modality.name}
+                        </button>
+                      </td>
+
+                      {/* COLUNA CATEGORIAS SEPARADAS */}
+                      <td className="px-6 py-4 whitespace-wrap text-sm text-primary-900 font-medium max-w-xs">
+                        <div className="flex flex-wrap gap-x-1">
+                          {modality.category?.split(", ").map((catNome, idx, arr) => (
+                            <span key={idx}>
+                              <span 
+                                className="text-blue-600 hover:underline cursor-pointer text-sm"
+                                onClick={() => {
+                                  const catObj = categorias.find(c => c.name === catNome);
+                                  if (catObj) {
+                                    setCategoriaSelecionada(catObj);
+                                    setAbrirVisualizarCategoria(true);
+                                  }
+                                }}
+                              >
+                                {catNome}
+                              </span>
+                              {idx < arr.length - 1 && <span className="text-gray-500">, </span>}
+                            </span>
+                          ))}
+                        </div>
+                      </td>
+
+                      {/* COLUNA TURMAS SEPARADAS */}
+                      <td className="px-6 py-4 whitespace-wrap text-sm text-primary-900 font-medium max-w-xs">
+                        <div className="flex flex-wrap gap-x-1">
+                          {modality.classes?.split(", ").map((turmaNome, idx, arr) => (
+                            <span key={idx}>
+                              <span 
+                                className="text-blue-600 hover:underline cursor-pointer text-sm"
+                                onClick={() => {
+                                  const turmaObj = turmas.find(t => t.nomeTurma === turmaNome);
+                                  if (turmaObj) {
+                                    setTurmaSelecionada(turmaObj);
+                                    setAbrirVisualizarTurma(true);
+                                  }
+                                }}
+                              >
+                                {turmaNome}
+                              </span>
+                              {idx < arr.length - 1 && <span className="text-gray-500">, </span>}
+                            </span>
+                          ))}
+                        </div>
+                      </td>
 											<td className="px-6 py-4 whitespace-nowrap text-sm font-medium flex gap-3 items-center">
 												<button
 													disabled={!isAdmin}
@@ -2108,7 +2144,31 @@ const Cadastros = () => {
                   setAbrirVisualizarCategoria(false);
               } catch (e) { console.error("Erro na sincronização de categoria:", e); }
           }}
-      />
+        />
+      
+        <ModalVisualizarModalidade
+          aberto={abrirVisualizarModalidade}
+          onClose={() => setAbrirVisualizarModalidade(false)}
+          modalidade={modalidadeSelecionada}
+          categoriasGlobais={categorias}
+          turmasGlobais={turmas}
+          onSave={async (dados) => {
+              try {
+                  await update('modalidades', dados.id, dados);
+                  setModalidades(prev => prev.map(m => m.id === dados.id ? dados : m));
+                  
+                  // Sincronização: Atualiza a modalidade dentro das Categorias afetadas
+                  const novasCategorias = categorias.map(c => {
+                      if (dados.category.includes(c.name)) return { ...c, modality: dados.name };
+                      return c;
+                  });
+                  for(const c of novasCategorias) await update('categorias', c.id, c);
+                  setCategorias(novasCategorias);
+
+                  setAbrirVisualizarModalidade(false);
+              } catch (e) { console.error(e); }
+          }}
+        />
 			</div>
 		</Layout>
 	);

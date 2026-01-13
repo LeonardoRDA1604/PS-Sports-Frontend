@@ -35,7 +35,12 @@ export default function ModalVisualizarCategoria({ aberto, onClose, categoria, o
     };
 
     const labelStyle = "text-[10px] font-bold uppercase text-[#101944] px-1 mb-1 block";
-    const getFieldStyle = (editing) => `w-full px-4 py-2.5 h-[42px] rounded-xl font-medium transition-all outline-none border text-sm shadow-sm flex items-center justify-between ${editing ? "bg-white text-gray-800 border-blue-500 ring-2 ring-blue-500/10 cursor-pointer" : "bg-gray-200 text-gray-500 border-gray-300 cursor-not-allowed shadow-none"}`;
+    const getFieldStyle = (editing) => {
+        const base = "w-full px-4 py-2.5 h-[42px] rounded-xl font-medium transition-all outline-none border text-sm shadow-sm flex items-center justify-between";
+        return editing 
+            ? `${base} bg-white text-gray-800 border-blue-500 ring-2 ring-blue-500/10` 
+            : `${base} bg-gray-200 text-gray-500 border-gray-300 cursor-not-allowed shadow-none`;
+    };
 
     return (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-99999 p-4">
@@ -52,22 +57,20 @@ export default function ModalVisualizarCategoria({ aberto, onClose, categoria, o
                         </div>
                     </div>
 
-                    <div className="p-6 space-y-5">
-                        {/* Nome da Categoria */}
+                    <div className="flex-1 overflow-y-auto custom-scrollbar p-6 space-y-5">
                         <div>
                             <label className={labelStyle}>Nome da Categoria:</label>
-                            <input value={formData.name} onChange={(e) => setFormData({...formData, name: e.target.value})} disabled={!isEditing} className={getFieldStyle(isEditing)} />
+                            <input value={formData.name} onChange={(e) => setFormData({...formData, name: e.target.value})} disabled={!isEditing} className={`${getFieldStyle(isEditing)} ${isEditing ? 'cursor-text' : ''}`} />
                         </div>
 
-                        {/* Menu de Turmas (Multiseleção) */}
                         <div className="relative">
                             <label className={labelStyle}>Turmas Vinculadas:</label>
-                            <div onClick={() => isEditing && setShowTurmasMenu(!showTurmasMenu)} className={getFieldStyle(isEditing)}>
-                                <span className="truncate">{formData.classesArray.length > 0 ? formData.classesArray.join(", ") : "Nenhuma turma selecionada"}</span>
+                            <div onClick={() => isEditing && setShowTurmasMenu(!showTurmasMenu)} className={`${getFieldStyle(isEditing)} ${isEditing ? 'cursor-pointer' : ''}`}>
+                                <span className="truncate">{formData.classesArray.length > 0 ? formData.classesArray.join(", ") : "Nenhuma"}</span>
                                 <HiOutlineTable className="text-gray-400" size={18} />
                             </div>
                             {showTurmasMenu && isEditing && (
-                                <div className="absolute z-20 mt-1 w-full bg-white border border-gray-200 rounded-xl shadow-xl p-2 max-h-48 overflow-y-auto custom-scrollbar">
+                                <div className="absolute z-30 mt-1 w-full bg-white border border-gray-200 rounded-xl shadow-2xl p-2 max-h-40 overflow-y-auto custom-scrollbar animate-in fade-in slide-in-from-top-1">
                                     {turmasGlobais.map(t => (
                                         <div key={t.id} onClick={() => toggleTurma(t.nomeTurma)} className={`px-3 py-2 rounded-lg text-sm cursor-pointer mb-1 flex justify-between items-center ${formData.classesArray.includes(t.nomeTurma) ? 'bg-blue-50 text-blue-600 font-bold' : 'hover:bg-gray-50'}`}>
                                             {t.nomeTurma} {formData.classesArray.includes(t.nomeTurma) && <IoCheckmark />}
@@ -77,15 +80,14 @@ export default function ModalVisualizarCategoria({ aberto, onClose, categoria, o
                             )}
                         </div>
 
-                        {/* Menu de Modalidade (Seleção Única) */}
                         <div className="relative">
                             <label className={labelStyle}>Modalidade:</label>
-                            <div onClick={() => isEditing && setShowModalityMenu(!showModalityMenu)} className={getFieldStyle(isEditing)}>
+                            <div onClick={() => isEditing && setShowModalityMenu(!showModalityMenu)} className={`${getFieldStyle(isEditing)} ${isEditing ? 'cursor-pointer' : ''}`}>
                                 <span>{formData.modality || "Selecione"}</span>
                                 <IoChevronDown className="text-gray-400" size={18} />
                             </div>
                             {showModalityMenu && isEditing && (
-                                <div className="absolute z-20 mt-1 w-full bg-white border border-gray-200 rounded-xl shadow-xl p-2">
+                                <div className="absolute z-30 mt-1 w-full bg-white border border-gray-200 rounded-xl shadow-2xl p-2 max-h-40 overflow-y-auto custom-scrollbar animate-in fade-in slide-in-from-top-1">
                                     {modalidadesGlobais.map(m => (
                                         <div key={m.id} onClick={() => { setFormData({...formData, modality: m.name}); setShowModalityMenu(false); }} className={`px-3 py-2 rounded-lg text-sm cursor-pointer mb-1 ${formData.modality === m.name ? 'bg-blue-50 text-blue-600 font-bold' : 'hover:bg-gray-50'}`}>
                                             {m.name}
