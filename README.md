@@ -12,28 +12,28 @@ O sistema foi planejado, prototipado e implementado seguindo *boas práticas de 
 ---
 
 ## Índice
-- [Descrição](#-descrição)
-- [Objetivo do Projeto](#-objetivo-do-projeto)
-- [Tecnologias e Ferramentas Utilizadas](#️-tecnologias-e-ferramentas-utilizadas)
-- [Prototipação](#-prototipação-figma)
-- [Responsividade](#-responsividade)
-- [Gerenciamento do Projeto](#-gerenciamento-do-projeto-jira)
-- [Arquitetura do Projeto](#-arquitetura-do-projeto-frontend)
-- [Funcionalidades](#-funcionalidades)
-- [Equipe e Contribuições](#-equipe-e-contribuições)
-    - [Contribuições dos Integrantes no Projeto](#-contribuições-dos-integrantes-no-projeto)
-    - [Contribuições de Colaboradores Externos no Projeto](#-contribuições-de-colaboradores-externos-no-projeto)
+- [1. Descrição](#-descrição)
+- [2. Objetivo do Projeto](#-objetivo-do-projeto)
+- [3. Tecnologias e Ferramentas Utilizadas](#️-tecnologias-e-ferramentas-utilizadas)
+- [4. Prototipação](#-prototipação-figma)
+- [5. Responsividade](#-responsividade)
+- [6. Gerenciamento do Projeto](#-gerenciamento-do-projeto-jira)
+- [7. Arquitetura do Projeto](#-arquitetura-do-projeto-frontend)
+- [8. Funcionalidades](#-funcionalidades)
+- [9. Equipe e Contribuições](#-equipe-e-contribuições)
+    - [9.1. Contribuições dos Integrantes no Projeto](#-contribuições-dos-integrantes-no-projeto)
+    - [9.2. Contribuições de Colaboradores Externos no Projeto](#-contribuições-de-colaboradores-externos-no-projeto)
 <!-- - [Como baixar e utilizar o sistema](#️-como-baixar-e-utilizar-o-sistema) -->
-- [Dependências Necessárias](#-dependências-necessárias)
-    - [Como Baixar e Utilizar o Repositório](#️-como-baixar-e-utilizar-o-repositório)
-        - [Scripts Disponíveis](#️-scripts-disponíveis)
-- [Status do Projeto](#-status-do-projeto)
-- [Apoio](#-apoio)
-- [Versionamento](#️-versionamento)
-    - [Significado das versões](#-significado-das-versões)
-    - [Objetivo do versionamento](#-objetivo-do-versionamento)
-- [Colaboração](#-colaboração)
-- [Licença](#-licença)
+- [10. Dependências Necessárias](#-dependências-necessárias)
+    - [11. Como Baixar e Utilizar o Repositório](#️-como-baixar-e-utilizar-o-repositório)
+        - [11.1. Scripts Disponíveis](#️-scripts-disponíveis)
+- [12. Status do Projeto](#-status-do-projeto)
+- [13. Apoio](#-apoio)
+- [14. Versionamento](#️-versionamento)
+    - [14.1. Significado das versões](#-significado-das-versões)
+    - [14.2. Objetivo do versionamento](#-objetivo-do-versionamento)
+- [15. Colaboração](#-colaboração)
+- [16. Licença](#-licença)
 
 ---
 
@@ -288,7 +288,7 @@ src/
     - **[npm (Node Package Manager)](https://www.npmjs.com/)** — Gerenciador de pacotes (instalado junto com o Node.js)
         - Versão recomendada: **9.x ou superior**
 
-> ℹ️ As demais dependências são instaladas automaticamente ao seguir o [tutorial de como baixar e utilizar o repositório](#️-como-baixar-e-utilizar-o-repositório), via `npm install`, conforme definido no arquivo [package.json](https://github.com/LeonardoRDA1604/PS-Sports-Frontend/blob/main/package.json). 
+> ℹ️ As demais dependências são instaladas automaticamente ao seguir o [tutorial de como baixar e utilizar o repositório](#️-como-baixar-e-utilizar-o-repositório), via `npm install`, conforme definido no arquivo [package.json](https://github.com/LeonardoRDA1604/PS-Sports-Frontend/blob/main/package.json). \
 > ℹ️ As versões exatas podem ser consultadas [aqui](https://github.com/LeonardoRDA1604/PS-Sports-Frontend/blob/main/package.json).
 
 2. Verifique a instalação.
