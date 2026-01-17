@@ -1,0 +1,421 @@
+<div style="background-color: rgba(99, 122, 156, 0.48); padding: 20px;">
+<!-- <div style="background-color: rgba(2, 103, 255, 0.4); padding: 20px;"> -->
+
+# PS Sport’s – Sistema de Gestão (Frontend)
+### 📝 Descrição:
+Projeto desenvolvido para a escola de futebol [PS Sport's](https://pssports.com.br/), no âmbito do **Projeto Integrador** do programa [Bolsa Futuro Digital (BFD)](https://aponti.org.br/capital-humano#programa-bfd), promovido pela [Aponti](https://aponti.org.br/). A [PS Sport's](https://pssports.com.br/) é uma escola de futebol que necessita de uma plataforma digital para apoiar e otimizar seus processos internos, centralizando informações e facilitando a gestão das atividades administrativas e esportivas.
+
+Diante dessa necessidade, este projeto tem como objetivo facilitar o gerenciamento de **atletas**, **responsáveis**, **interessados (leads)**, **treinadores**, **turmas**, **categorias** e **modalidades**, por meio de uma interface *moderna*, *responsiva* e *intuitiva*. O frontend foi desenvolvido para consumir APIs externas (Backend), permitindo a exibição dos dados de forma *clara*, *organizada* e *eficiente*.
+
+O sistema foi planejado, prototipado e implementado seguindo *boas práticas de desenvolvimento*, com foco em *organização*, *usabilidade* e *experiência do usuário*, buscando oferecer uma *solução funcional* e *escalável* que *atenda às demandas da instituição*.
+
+---
+
+## Índice
+- [Descrição](#-descrição)
+- [Objetivo do Projeto](#-objetivo-do-projeto)
+- [Tecnologias e Ferramentas Utilizadas](#️-tecnologias-e-ferramentas-utilizadas)
+- [Prototipação](#-prototipação-figma)
+- [Responsividade](#-responsividade)
+- [Gerenciamento do Projeto](#-gerenciamento-do-projeto-jira)
+- [Arquitetura do Projeto](#-arquitetura-do-projeto-frontend)
+- [Funcionalidades](#-funcionalidades)
+- [Equipe e Contribuições](#-equipe-e-contribuições)
+    - [Contribuições dos Integrantes no Projeto](#-contribuições-dos-integrantes-no-projeto)
+    - [Contribuições de Colaboradores Externos no Projeto](#-contribuições-de-colaboradores-externos-no-projeto)
+<!-- - [Como baixar e utilizar o sistema](#️-como-baixar-e-utilizar-o-sistema) -->
+- [Dependências Necessárias](#-dependências-necessárias)
+    - [Como Baixar e Utilizar o Repositório](#️-como-baixar-e-utilizar-o-repositório)
+        - [Scripts Disponíveis](#️-scripts-disponíveis)
+- [Status do Projeto](#-status-do-projeto)
+- [Apoio](#-apoio)
+- [Versionamento](#️-versionamento)
+    - [Significado das versões](#-significado-das-versões)
+    - [Objetivo do versionamento](#-objetivo-do-versionamento)
+- [Colaboração](#-colaboração)
+- [Licença](#-licença)
+
+---
+
+## 🎯 Objetivo do Projeto
+
+O Sistema foi desenvolvido para fornecer uma **interface web responsiva e interativa** para o gerenciamento da escola de atletas PS Sport's, integrando dados e funcionalidades de forma clara e intuitiva. O projeto permite:
+
+- Integração com o **Backend**.
+    - Projeto desenvolvido em colaboração com uma equipe de Backend de outra turma do [mesmo curso (BFD)](https://aponti.org.br/capital-humano#programa-bfd), **[clique aqui para ver o repositório do Backend](https://github.com/cabarros3/ps-sports)**;  
+- Garantia de *boa experiência do usuário (UX/UI)*.
+- Desenvolvimento de novos módulos e visualizações de dados;
+- Expansão para novas páginas, gráficos e recursos interativos;
+
+O desenvolvimento envolveu *prototipação*, *implementação* e *validação de soluções*, aplicando *boas práticas de engenharia de software* e *design de interfaces*.
+
+---
+
+### 🖥️ Tecnologias e Ferramentas Utilizadas
+- Colocar ícone **[*React.js*](https://react.dev/)**
+- Colocar ícone **[*JavaScript (ES6+)*](https://www.javascript.com/)**
+- Colocar ícone **[*SWC*](https://swc.rs/)** (Compilador em Rust para builds rápidos)
+- Colocar ícone **[*Vite*](https://vite.dev/)**
+- Colocar ícone **[*Node.js*](https://nodejs.org/)**
+- Colocar ícone **[*Tailwind CSS*](https://tailwindcss.com/)**
+- Colocar ícone **[*HTML5*](https://html.com/)**
+- Colocar ícone **[*CSS3*](https://www.w3.org/Style/CSS/)**
+- Colocar ícone **[*JSON Server*](https://my-json-server.typicode.com/)** (API fake para simulação de backend)
+- Colocar ícone **[*Git*](https://git-scm.com/) *&* [*GitHub*](https://github.com/)**
+- Colocar ícone **[*Figma*](https://www.figma.com/)**
+- Colocar ícone **[*Jira*](https://www.atlassian.com/br/software/jira)**
+
+---
+
+## 🎨 Prototipação (Figma)
+Todas as telas foram prototipadas no **Figma**, garantindo:
+- Padronização visual
+- Melhor UX/UI
+- Redução de retrabalho
+- Fidelidade entre design e implementação
+
+---
+
+## 📱 Responsividade
+O projeto é totalmente responsivo, garantindo boa experiência em:
+- Desktop
+- Tablet
+- Mobile
+
+---
+
+## 📋 Gerenciamento do Projeto (Jira)
+O **[Jira](https://www.atlassian.com/br/software/jira)** foi utilizado para organizar e acompanhar o desenvolvimento do projeto, utilizando práticas de **Scrum** e **Kanban**, garantindo:
+- Criação, organização e priorização do **Product Backlog**
+- Planejamento e acompanhamento das **sprints**
+- Visualização do fluxo de trabalho por meio do **quadro Kanban**
+- Distribuição de tarefas e acompanhamento do progresso
+- Melhor comunicação e transparência no desenvolvimento
+- Documentação, refinamento e acompanhamento dos **requisitos funcionais**
+
+---
+
+## 🧱 Arquitetura do Projeto (Frontend)
+
+```
+src/
+│── assets/
+│── components/
+│── pages/
+│── services/
+│── hooks/
+│── styles/
+│── utils/
+│── App.jsx
+│── main.jsx
+```
+
+---
+
+
+## ✨ Funcionalidades
+
+- Interface institucional
+- Cadastro e listagem de atletas
+- Turmas e categorias
+- Autenticação (login/registro)
+- Componentes reutilizáveis
+- Integração com API
+
+---
+
+## 👥 Equipe e Contribuições: 
+### 👩🏽‍💻 Contribuições dos Integrantes no Projeto:
+
+<table>
+<!-- Cabeçalho -->
+  <thead>
+    <tr>
+      <th style="background-color: rgba(3, 0, 175, 0.85); font-size: 20px; color: rgba(255, 255, 255, 1); padding: 16px 40px;">Nome</th>
+      <th style="background-color: rgba(3, 0, 175, 0.85); font-size: 20px; color: rgba(255, 255, 255, 1); padding: 16px 12px;">Contribuições</th>
+      <th style="background-color: rgba(3, 0, 175, 0.85); font-size: 20px; color: rgba(255, 255, 255, 1); padding: 16px 20px;">Papel</th>
+      <th style="background-color: rgba(3, 0, 175, 0.85); font-size: 20px; color: rgba(255, 255, 255, 1); padding: 16px 16px;">Equipe</th>
+      <th style="background-color: rgba(3, 0, 175, 0.85); font-size: 20px; color: rgba(255, 255, 255, 1); padding: 16px 12px;">LinkedIn</th>
+      <th style="background-color: rgba(3, 0, 175, 0.85); font-size: 20px; color: rgba(255, 255, 255, 1); padding: 16px 12px;">GitHub</th>
+    </tr>
+  </thead>
+<!-- Corpo (Items da tabela) -->
+  <tbody>
+    <!-- Contribuidor 1 (Leonardo Rafael) -->
+    <tr>
+      <td>Leonardo Rafael</td>
+      <td>Contribuição</td>
+      <td>Scrum Master; DevOps; QA</td>
+      <td>DevOps & QA; Docs; Development; Design; Communication</td>
+      <td><a href="https://www.linkedin.com/in/leonardorafael1604/" target="_blank" rel="noopener noreferrer">/leonardorafael1604</a></td>
+      <td><a href="https://github.com/LeonardoRDA1604" target="_blank" rel="noopener noreferrer">/LeonardoRDA1604</a></td>
+    </tr>
+    <!-- Contribuidor 2 (Leandro Wilke) -->
+    <tr>
+      <td>Leandro Wilke</td>
+      <td>Contribuição</td>
+      <td>Tech Leader and DevOps</td>
+      <td>Development; DevOps & QA; Communication</td>
+      <td><a href="https://www.linkedin.com/in/leandro-wilke/" target="_blank" rel="noopener noreferrer">/leandro-wilke/</a></td>
+      <td><a href="https://github.com/LeandroWilkeDev" target="_blank" rel="noopener noreferrer">/LeandroWilkeDev</a></td>
+    </tr>
+    <!-- Contribuidor 3 (Guilherme Henrique) -->
+    <tr>
+      <td>Guilherme Henrique</td>
+      <td>Contribuição</td>
+      <td>Scrum Team</td>
+      <td>Design; Development</td>
+      <td><a href="https://www.linkedin.com/in/guilhermechroma/" target="_blank" rel="noopener noreferrer">/guilhermechroma</a></td>
+      <td><a href="https://github.com/guilhermechroma" target="_blank" rel="noopener noreferrer">/guilhermechroma</a></td>
+    </tr>
+    <!-- Contribuidor 4 (Mateus Soares) -->
+    <tr>
+      <td>Mateus Soares</td>
+      <td>Contribuição</td>
+      <td>Scrum Team</td>
+      <td>Design; Development</td>
+      <td><a href="https://www.linkedin.com/in/mateeussoares/" target="_blank" rel="noopener noreferrer">/mateeussoares/</a></td>
+      <td><a href="https://github.com/mateeussoares" target="_blank" rel="noopener noreferrer">/mateeussoares</a></td>
+    </tr>
+    <!-- Contribuidor 5 (Luana Vitorino) -->
+    <tr>
+      <td>Luana Vitorino</td>
+      <td>Contribuição</td>
+      <td>Scrum Team</td>
+      <td>Docs; Development</td>
+      <td><a href="https://www.linkedin.com/in/" target="_blank" rel="noopener noreferrer">/usuário</a></td>
+      <td><a href="https://github.com/" target="_blank" rel="noopener noreferrer">/luanavitorino</a></td>
+    </tr>
+    <!-- Contribuidor 6 (Gabriel Josimar) -->
+    <tr>
+      <td>Gabriel Josimar</td>
+      <td>Contribuição</td>
+      <td>Scrum Team</td>
+      <td>Docs</td>
+      <td><a href="https://www.linkedin.com/in/" target="_blank" rel="noopener noreferrer">/usuário</a></td>
+      <td><a href="https://github.com/" target="_blank" rel="noopener noreferrer">/GabrielJosimar123</a></td>
+    </tr>
+    <!-- Contribuidor 7 (Lucas Silva) -->
+    <tr>
+      <td>Lucas Silva</td>
+      <td>Contribuição</td>
+      <td>Scrum Team</td>
+      <td>Design</td>
+      <td><a href="https://www.linkedin.com/in/" target="_blank" rel="noopener noreferrer">/usuário</a></td>
+      <td><a href="https://github.com/" target="_blank" rel="noopener noreferrer">/lukaaszx</a></td>
+    </tr>
+    <!-- Contribuidor 8 (Jean Menino) -->
+    <tr>
+      <td>Jean Menino</td>
+      <td>Contribuição</td>
+      <td>Scrum Team</td>
+      <td>Development</td>
+      <td><a href="https://www.linkedin.com/in/" target="_blank" rel="noopener noreferrer">/usuário</a></td>
+      <td><a href="https://github.com/" target="_blank" rel="noopener noreferrer">/jeanwox</a></td>
+    </tr>
+    <!-- Contribuidor 9 (Guilherme Manoel) -->
+    <tr>
+      <td>Guilherme Manoel</td>
+      <td>Contribuição</td>
+      <td>Scrum Team</td>
+      <td>Docs</td>
+      <td><a href="https://www.linkedin.com/in/" target="_blank" rel="noopener noreferrer">/usuário</a></td>
+      <td><a href="https://github.com/" target="_blank" rel="noopener noreferrer">/guizihn</a></td>
+    </tr>
+<!-- Fim do Corpo (Items da tabela) -->
+  </tbody>
+</table>
+
+<br>
+
+### 👩🏽‍💻 Contribuições de Colaboradores Externos no Projeto:
+
+<table>
+<!-- Cabeçalho -->
+  <thead>
+    <tr>
+      <th style="background-color: rgba(3, 0, 175, 0.85); font-size: 20px; color: rgba(255, 255, 255, 1); padding: 16px 40px;">Nome</th>
+      <th style="background-color: rgba(3, 0, 175, 0.85); font-size: 20px; color: rgba(255, 255, 255, 1); padding: 16px 12px;">Contribuições</th>
+      <th style="background-color: rgba(3, 0, 175, 0.85); font-size: 20px; color: rgba(255, 255, 255, 1); padding: 16px 12px;">LinkedIn</th>
+      <th style="background-color: rgba(3, 0, 175, 0.85); font-size: 20px; color: rgba(255, 255, 255, 1); padding: 16px 12px;">GitHub</th>
+    </tr>
+  </thead>
+<!-- Corpo (Items da tabela) -->
+  <tbody>
+    <!-- Colaborador externo 1 (Camila Moura) -->
+    <tr>
+      <td>Camila Moura</td>
+      <td>Documentação de Requisitos, apoio na elaboração do README e Slides de Apresentação.</td>
+      <td><a href="https://www.linkedin.com/in/camilacelestino" target="_blank" rel="noopener noreferrer">/camilacelestino</a></td>
+      <td><a href="https://github.com/ccelesti" target="_blank" rel="noopener noreferrer">/ccelesti</a></td>
+    </tr>
+    <!-- Colaborador externo 2 (Gabriel Lucas) -->
+    <tr>
+      <td>Gabriel Lucas</td>
+      <td>Documentação de Requisitos</td>
+      <td><a href="https://www.linkedin.com/in/gabriel-lucas-de-oliveira-xavier-507564358/" target="_blank" rel="noopener noreferrer">/gabriel-lucas</a></td>
+      <td><a href="https://github.com/Ggeasy1574" target="_blank" rel="noopener noreferrer">/Ggeasy1574</a></td>
+    </tr>
+<!-- Fim do Corpo (Items da tabela) -->
+  </tbody>
+</table>
+
+<!--
+---
+## 🖥️ Como baixar e utilizar o Sistema:
+1. Baixe o sistema em nosso site:
+    - https://sites.google.com/view/ps-sports-frontend-project
+
+2. Fazer um Tutorial 
+3. #to-do
+4. #to-do
+5. #to-do
+6. #to-do
+7. #to-do
+
+-->
+
+---
+
+## 📦 Dependências Necessárias
+1. Antes de iniciar, certifique-se de ter as seguintes ferramentas instaladas:
+    - **[Git](https://git-scm.com/)** — Controle de versão
+        - Versão recomendada: **2.30 ou superior**
+
+    - **[Node.js](https://nodejs.org/)** — Ambiente de execução JavaScript
+        - Versão recomendada: **18.x (LTS) ou superior**
+
+    - **[npm (Node Package Manager)](https://www.npmjs.com/)** — Gerenciador de pacotes (instalado junto com o Node.js)
+        - Versão recomendada: **9.x ou superior**
+
+> ℹ️ As demais dependências são instaladas automaticamente ao seguir o [tutorial de como baixar e utilizar o repositório](#️-como-baixar-e-utilizar-o-repositório), via `npm install`, conforme definido no arquivo [package.json](https://github.com/LeonardoRDA1604/PS-Sports-Frontend/blob/main/package.json). 
+> ℹ️ As versões exatas podem ser consultadas [aqui](https://github.com/LeonardoRDA1604/PS-Sports-Frontend/blob/main/package.json).
+
+2. Verifique a instalação.
+Após instalar as dependências globais, verifique se estão disponíveis com os comandos:
+```bash
+git --version
+```
+
+```bash
+node --version
+```
+
+```bash
+npm --version
+```
+
+## ▶️ Como Baixar e Utilizar o Repositório:
+
+Essas instruções permitirão que você obtenha uma cópia do projeto em operação na sua máquina local para fins de desenvolvimento e teste.
+
+Para informações sobre como contribuir com o projeto, consulte a seção [Colaboração](#-colaboração).
+
+
+1. Clone o repositório para sua máquina local.
+```bash
+git clone https://github.com/LeonardoRDA1604/PS-Sports-Frontend
+```
+- > ℹ️ Ou, se preferir, [baixe o projeto como arquivo .zip](https://github.com/LeonardoRDA1604/PS-Sports-Frontend/archive/refs/heads/main.zip) pelo [GitHub](https://github.com/LeonardoRDA1604/PS-Sports-Frontend).
+
+2. Acesse a pasta do projeto.
+```bash
+cd ./PS-Sports-Frontend/
+```
+
+3. Instale todas as dependências do projeto com:
+```bash
+npm install
+```
+
+4. Execute o projeto (Frontend) com:
+```bash
+npm run dev
+```
+- > ℹ️ O projeto será executado em um endereço semelhante a: [http://localhost:5173](http://localhost:5173)
+
+5. Para simular uma API local: Servidor fake (JSON Server)
+    - **Em outro terminal** (cmd, powershell, git bash, etc.), execute: 
+```bash
+npm run server
+```
+- > ℹ️ O servidor será executado em um endereço semelhante a: [http://localhost:3001](http://localhost:3001)
+
+<br>
+<br>
+
+### ⌨️ Scripts Disponíveis:
+```bash
+npm run dev         # Inicia o frontend em modo desenvolvimento
+
+npm run build       # Gera a build de produção
+
+npm run preview     # Visualiza a build localmente
+
+npm run lint        # Executa a verificação de lint com ESLint
+
+npm run server      # Inicia o JSON Server para simulação de backend
+```
+
+---
+
+## 🚧 Status do Projeto
+
+Em desenvolvimento.
+
+---
+
+## 📚 Apoio:
+### Aponti
+- Site: https://aponti.org.br/
+- LinkedIn: [/aponti](https://www.linkedin.com/company/aponti/)
+- Instagram: [@apontipe](https://www.instagram.com/apontipe/)
+    - ##### Programa [Bolsa Futuro Digital (BFD)](https://aponti.org.br/capital-humano#programa-bfd)
+
+### PS Sport's
+- Site: https://pssports.com.br/
+- LinkedIn: [/ps-sport-s](https://www.linkedin.com/company/ps-sport-s/)
+- Instagram: [@pssportsfc](https://www.instagram.com/pssportsfc/)
+
+
+### Prof. Rudimacy Duprat
+  - LinkedIn: [/rudimacy-duprat-desenvolvimentosistemas](https://www.linkedin.com/in/rudimacy-duprat-desenvolvimentosistemas/)
+  - Github: [/RudimacyDuprat](https://github.com/RudimacyDuprat)
+
+
+---
+
+## 🏷️ Versionamento
+
+Este projeto segue o padrão [Semantic Versioning (SemVer)](https://semver.org/) para controle de versões, garantindo clareza, previsibilidade e compatibilidade entre as mudanças. Todas as versões publicadas do projeto podem ser consultadas por meio das [*tags* do repositório](https://github.com/LeonardoRDA1604/PS-Sports-Frontend/tags), onde cada tag representa um marco importante na evolução do sistema.
+
+O versionamento utiliza o seguinte formato:
+```bash
+MAJOR.MINOR.PATCH
+```
+
+#### 🔹 Significado das versões
+- **MAJOR** → Alterações incompatíveis com versões anteriores (*breaking changes*)
+- **MINOR** → Novas funcionalidades adicionadas de forma retrocompatível
+- **PATCH** → Correções de bugs e pequenos ajustes que não afetam a compatibilidade
+
+#### 🔹 Objetivo do versionamento
+
+- Melhor rastreabilidade da evolução do projeto
+- Identificação clara de mudanças relevantes
+- Facilidade na manutenção, colaboração e integração contínua 
+
+---
+
+## 🤝 Colaboração
+Para contribuir com o projeto, leia o arquivo [CONTRIBUTING.md](CONTRIBUTING.md) para obter detalhes sobre o nosso código de conduta e o processo de contribuição.
+Após a leitura, sinta-se à vontade para abrir uma [*issue*](https://github.com/LeonardoRDA1604/PS-Sports-Frontend/issues) ou enviar um [*pull request*](https://github.com/LeonardoRDA1604/PS-Sports-Frontend/pulls). 
+Ideias, sugestões de melhorias e feedbacks são sempre bem-vindos!
+
+---
+
+
+
+
+## 📄 Licença
+Este projeto está sob a [Licença MIT](https://opensource.org/license/mit) - veja o arquivo [LICENSE](LICENSE) para detalhes.
