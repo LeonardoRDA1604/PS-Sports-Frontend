@@ -25,15 +25,15 @@ O sistema foi planejado, prototipado e implementado seguindo *boas práticas de 
     - [9.2. Contribuições de Colaboradores Externos no Projeto](#-contribuições-de-colaboradores-externos-no-projeto)
 <!-- - [Como baixar e utilizar o sistema](#️-como-baixar-e-utilizar-o-sistema) -->
 - [10. Dependências Necessárias](#-dependências-necessárias)
-    - [11. Como Baixar e Utilizar o Repositório](#️-como-baixar-e-utilizar-o-repositório)
-        - [11.1. Scripts Disponíveis](#️-scripts-disponíveis)
-- [12. Status do Projeto](#-status-do-projeto)
-- [13. Apoio](#-apoio)
-- [14. Versionamento](#️-versionamento)
-    - [14.1. Significado das versões](#-significado-das-versões)
-    - [14.2. Objetivo do versionamento](#-objetivo-do-versionamento)
-- [15. Colaboração](#-colaboração)
-- [16. Licença](#-licença)
+    - [10.1. Como Baixar e Utilizar o Repositório](#️-como-baixar-e-utilizar-o-repositório)
+        - [10.1.1. Scripts Disponíveis](#️-scripts-disponíveis)
+- [11. Status do Projeto](#-status-do-projeto)
+- [12. Apoio](#-apoio)
+- [13. Versionamento](#️-versionamento)
+    - [13.1. Significado das versões](#-significado-das-versões)
+    - [13.2. Objetivo do versionamento](#-objetivo-do-versionamento)
+- [14. Colaboração](#-colaboração)
+- [15. Licença](#-licença)
 
 ---
 
